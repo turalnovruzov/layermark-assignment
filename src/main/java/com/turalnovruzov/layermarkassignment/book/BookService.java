@@ -35,4 +35,14 @@ public class BookService {
     public Book getBookById(UUID id) throws ResourceNotFoundException {
         return bookRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
+
+    public Book updateBook(UUID id, Book newBook) throws ResourceNotFoundException {
+        Author author = authorService.getAuthorById(newBook.getAuthor().getId());
+        newBook.setAuthor(author);
+
+        Book book = getBookById(id);
+        book.updateWithBook(newBook);
+
+        return bookRepository.save(book);
+    }
 }

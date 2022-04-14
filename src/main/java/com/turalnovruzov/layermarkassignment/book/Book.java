@@ -58,6 +58,12 @@ public class Book {
         return id;
     }
 
+    public void updateWithBook(Book newBook) {
+        this.setIsbn(newBook.getIsbn());
+        this.setName(newBook.getName());
+        this.setAuthor(newBook.getAuthor());
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +

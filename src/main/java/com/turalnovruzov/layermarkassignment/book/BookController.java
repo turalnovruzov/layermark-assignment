@@ -29,6 +29,11 @@ public class BookController {
         return bookService.createBook(book);
     }
 
+    @PutMapping("/{id}")
+    public Book updateBook(@PathVariable UUID id, @RequestBody Book newBook) throws ResourceNotFoundException {
+        return bookService.updateBook(id, newBook);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteBookById(@PathVariable UUID id) {
         bookService.deleteBookById(id);
