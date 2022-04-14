@@ -30,4 +30,8 @@ public class AuthorService {
         author.updateWithAuthor(newAuthor);
         return authorRepository.save(author);
     }
+
+    public void deleteAuthorById(UUID id) {
+        authorRepository.deleteById(id);
+    }
 }

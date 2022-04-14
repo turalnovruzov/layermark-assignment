@@ -33,4 +33,9 @@ public class AuthorController {
     public Author updateAuthor(@PathVariable UUID id, @RequestBody Author newAuthor) throws ResourceNotFoundException {
         return authorService.updateAuthor(id, newAuthor);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteAuthorById(@PathVariable UUID id) {
+        authorService.deleteAuthorById(id);
+    }
 }
