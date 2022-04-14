@@ -19,6 +19,11 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable UUID id) throws ResourceNotFoundException {
+        return bookService.getBookById(id);
+    }
+
     @PostMapping
     public Book createBook(@RequestBody Book book) throws ResourceNotFoundException {
         return bookService.createBook(book);

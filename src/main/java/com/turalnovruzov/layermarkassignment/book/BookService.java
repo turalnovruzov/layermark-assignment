@@ -31,4 +31,8 @@ public class BookService {
     public void deleteBookById(UUID id) {
         bookRepository.deleteById(id);
     }
+
+    public Book getBookById(UUID id) throws ResourceNotFoundException {
+        return bookRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
 }
