@@ -1,6 +1,6 @@
 package com.turalnovruzov.layermarkassignment.author;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.turalnovruzov.layermarkassignment.book.Book;
 
 import javax.persistence.*;
@@ -27,8 +27,8 @@ public class Author {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Book> books = new ArrayList<>();
 
     public List<Book> getBooks() {

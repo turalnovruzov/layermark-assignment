@@ -1,6 +1,5 @@
 package com.turalnovruzov.layermarkassignment.book;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.turalnovruzov.layermarkassignment.author.Author;
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
@@ -27,9 +26,8 @@ public class Book {
     private String isbn;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "author_id", nullable = false)
-    @JsonManagedReference
     private Author author;
 
     public Author getAuthor() {
