@@ -28,4 +28,9 @@ public class AuthorController {
     public Author createAuthor(@RequestBody Author author) {
         return authorService.createAuthor(author);
     }
+
+    @PutMapping("/{id}")
+    public Author updateAuthor(@PathVariable UUID id, @RequestBody Author newAuthor) throws ResourceNotFoundException {
+        return authorService.updateAuthor(id, newAuthor);
+    }
 }

@@ -24,4 +24,10 @@ public class AuthorService {
     public Author createAuthor(Author author) {
         return authorRepository.save(author);
     }
+
+    public Author updateAuthor(UUID id, Author newAuthor) throws ResourceNotFoundException {
+        Author author = getAuthorById(id);
+        author.updateWithAuthor(newAuthor);
+        return authorRepository.save(author);
+    }
 }

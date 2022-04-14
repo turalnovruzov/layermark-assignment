@@ -3,7 +3,6 @@ package com.turalnovruzov.layermarkassignment.author;
 import com.turalnovruzov.layermarkassignment.book.Book;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.ArrayList;
@@ -56,6 +55,14 @@ public class Author {
 
     public UUID getId() {
         return id;
+    }
+
+    /**
+     * Updates author's name and age with the newAuthor's.
+     */
+    public void updateWithAuthor(Author newAuthor) {
+        if (newAuthor.getAge() != null) { this.setAge(newAuthor.getAge()); }
+        if (newAuthor.getName() != null) { this.setName(newAuthor.getName()); }
     }
 
 }
