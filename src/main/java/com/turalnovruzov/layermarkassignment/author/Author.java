@@ -63,8 +63,8 @@ public class Author {
      * Updates author's name and age with the newAuthor's.
      */
     public void updateWithAuthor(Author newAuthor) {
-        if (newAuthor.getAge() != null) { this.setAge(newAuthor.getAge()); }
-        if (newAuthor.getName() != null) { this.setName(newAuthor.getName()); }
+        this.setAge(newAuthor.getAge());
+        this.setName(newAuthor.getName());
     }
 
 }
