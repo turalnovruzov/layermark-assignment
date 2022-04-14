@@ -1,5 +1,8 @@
 package com.turalnovruzov.layermarkassignment.book;
 
+import com.turalnovruzov.layermarkassignment.author.Author;
+import com.turalnovruzov.layermarkassignment.author.AuthorService;
+import com.turalnovruzov.layermarkassignment.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +15,16 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private AuthorService authorService;
+
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
-    public Book createBook(Book book) {
+    public Book createBook(Book book) throws ResourceNotFoundException {
+        Author author = authorService.getAuthorById(book.getAuthor().getId());
+        book.setAuthor(author);
         return bookRepository.save(book);
     }
 

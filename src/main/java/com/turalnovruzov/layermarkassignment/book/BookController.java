@@ -1,5 +1,6 @@
 package com.turalnovruzov.layermarkassignment.book;
 
+import com.turalnovruzov.layermarkassignment.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createBook(@RequestBody Book book) {
+    public Book createBook(@RequestBody Book book) throws ResourceNotFoundException {
         return bookService.createBook(book);
     }
 
