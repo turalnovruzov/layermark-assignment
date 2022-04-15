@@ -4,6 +4,7 @@ import com.turalnovruzov.layermarkassignment.exception.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,12 +26,12 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createBook(@RequestBody Book book) throws ResourceNotFoundException {
+    public Book createBook(@Valid @RequestBody Book book) throws ResourceNotFoundException {
         return bookService.createBook(book);
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@PathVariable UUID id, @RequestBody Book newBook) throws ResourceNotFoundException {
+    public Book updateBook(@PathVariable UUID id, @Valid @RequestBody Book newBook) throws ResourceNotFoundException {
         return bookService.updateBook(id, newBook);
     }
 

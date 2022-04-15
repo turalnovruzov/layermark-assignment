@@ -4,6 +4,7 @@ import com.turalnovruzov.layermarkassignment.exception.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,12 +26,12 @@ public class AuthorController {
     }
 
     @PostMapping
-    public Author createAuthor(@RequestBody Author author) {
+    public Author createAuthor(@Valid @RequestBody Author author) {
         return authorService.createAuthor(author);
     }
 
     @PutMapping("/{id}")
-    public Author updateAuthor(@PathVariable UUID id, @RequestBody Author newAuthor) throws ResourceNotFoundException {
+    public Author updateAuthor(@PathVariable UUID id, @Valid @RequestBody Author newAuthor) throws ResourceNotFoundException {
         return authorService.updateAuthor(id, newAuthor);
     }
 
