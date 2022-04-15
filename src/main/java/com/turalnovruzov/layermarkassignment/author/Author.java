@@ -31,6 +31,14 @@ public class Author {
     @JsonIgnore
     private List<Book> books = new ArrayList<>();
 
+    public Author() {
+    }
+
+    public Author(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public List<Book> getBooks() {
         return books;
     }
@@ -57,14 +65,6 @@ public class Author {
 
     public UUID getId() {
         return id;
-    }
-
-    /**
-     * Updates author's name and age with the newAuthor's.
-     */
-    public void updateWithAuthor(Author newAuthor) {
-        this.setAge(newAuthor.getAge());
-        this.setName(newAuthor.getName());
     }
 
 }

@@ -4,6 +4,7 @@ import com.turalnovruzov.layermarkassignment.exception.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,13 +22,26 @@ public class AuthorService {
         return authorRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
-    public Author createAuthor(Author author) {
+    public Author createAuthor(@Valid AuthorRequest authorRequest) {
+        // Create the author
+        Author author = new Author(
+                authorRequest.getName(),
+                authorRequest.getAge()
+        );
+
+        // Save the author
         return authorRepository.save(author);
     }
 
-    public Author updateAuthor(UUID id, Author newAuthor) throws ResourceNotFoundException {
+    public Author updateAuthor(UUID id, @Valid AuthorRequest newAuthor) throws ResourceNotFoundException {
+        // Get the author with the given id
         Author author = getAuthorById(id);
-        author.updateWithAuthor(newAuthor);
+
+        // Update the author
+        author.setName(newAuthor.getName());
+        author.setAge(newAuthor.getAge());
+
+        // Save the author
         return authorRepository.save(author);
     }
 

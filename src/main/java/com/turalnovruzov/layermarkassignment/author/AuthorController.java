@@ -26,13 +26,13 @@ public class AuthorController {
     }
 
     @PostMapping
-    public Author createAuthor(@Valid @RequestBody Author author) {
-        return authorService.createAuthor(author);
+    public Author createAuthor(@Valid @RequestBody AuthorRequest authorRequest) {
+        return authorService.createAuthor(authorRequest);
     }
 
     @PutMapping("/{id}")
-    public Author updateAuthor(@PathVariable UUID id, @Valid @RequestBody Author newAuthor) throws ResourceNotFoundException {
-        return authorService.updateAuthor(id, newAuthor);
+    public Author updateAuthor(@PathVariable UUID id, @Valid @RequestBody AuthorRequest authorRequest) throws ResourceNotFoundException {
+        return authorService.updateAuthor(id, authorRequest);
     }
 
     @DeleteMapping("/{id}")
