@@ -1,4 +1,4 @@
-package com.turalnovruzov.layermarkassignment.payload;
+package com.turalnovruzov.layermarkassignment.exception;
 
 import java.util.Date;
 
