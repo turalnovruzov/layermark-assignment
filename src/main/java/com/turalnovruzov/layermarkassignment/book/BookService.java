@@ -24,14 +24,17 @@ public class BookService {
     }
 
     public Book createBook(@Valid BookRequest bookRequest) throws ResourceNotFoundException {
+        // Get the books author
         Author author = authorService.getAuthorById(bookRequest.getAuthorId());
 
+        // Create the new book
         Book book = new Book(
                 bookRequest.getName(),
                 bookRequest.getIsbn(),
                 author
         );
 
+        // Save the book
         return bookRepository.save(book);
     }
 
@@ -44,13 +47,18 @@ public class BookService {
     }
 
     public Book updateBook(UUID id, @Valid BookRequest bookRequest) throws ResourceNotFoundException {
+        // Get the books author
         Author author = authorService.getAuthorById(bookRequest.getAuthorId());
 
+        // Get the book with the given id
         Book book = getBookById(id);
+
+        // Update the book
         book.setName(bookRequest.getName());
         book.setIsbn(bookRequest.getIsbn());
         book.setAuthor(author);
 
+        // Save the book
         return bookRepository.save(book);
     }
 }
