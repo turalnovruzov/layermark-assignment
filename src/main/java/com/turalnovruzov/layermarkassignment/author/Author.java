@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.turalnovruzov.layermarkassignment.book.Book;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Author {
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private UUID id;
 
-    @NotNull
+    @NotBlank
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
