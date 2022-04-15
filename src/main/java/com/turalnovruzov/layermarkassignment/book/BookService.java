@@ -6,6 +6,7 @@ import com.turalnovruzov.layermarkassignment.exception.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,9 +23,15 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book createBook(Book book) throws ResourceNotFoundException {
-        Author author = authorService.getAuthorById(book.getAuthor().getId());
-        book.setAuthor(author);
+    public Book createBook(@Valid BookRequest bookRequest) throws ResourceNotFoundException {
+        Author author = authorService.getAuthorById(bookRequest.getAuthorId());
+
+        Book book = new Book(
+                bookRequest.getName(),
+                bookRequest.getIsbn(),
+                author
+        );
+
         return bookRepository.save(book);
     }
 
@@ -36,12 +43,13 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
-    public Book updateBook(UUID id, Book newBook) throws ResourceNotFoundException {
-        Author author = authorService.getAuthorById(newBook.getAuthor().getId());
-        newBook.setAuthor(author);
+    public Book updateBook(UUID id, @Valid BookRequest bookRequest) throws ResourceNotFoundException {
+        Author author = authorService.getAuthorById(bookRequest.getAuthorId());
 
         Book book = getBookById(id);
-        book.updateWithBook(newBook);
+        book.setName(bookRequest.getName());
+        book.setIsbn(bookRequest.getIsbn());
+        book.setAuthor(author);
 
         return bookRepository.save(book);
     }

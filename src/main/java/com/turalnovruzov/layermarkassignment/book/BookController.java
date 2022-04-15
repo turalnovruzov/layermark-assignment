@@ -26,13 +26,13 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createBook(@Valid @RequestBody Book book) throws ResourceNotFoundException {
-        return bookService.createBook(book);
+    public Book createBook(@Valid @RequestBody BookRequest bookRequest) throws ResourceNotFoundException {
+        return bookService.createBook(bookRequest);
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@PathVariable UUID id, @Valid @RequestBody Book newBook) throws ResourceNotFoundException {
-        return bookService.updateBook(id, newBook);
+    public Book updateBook(@PathVariable UUID id, @Valid @RequestBody BookRequest bookRequest) throws ResourceNotFoundException {
+        return bookService.updateBook(id, bookRequest);
     }
 
     @DeleteMapping("/{id}")

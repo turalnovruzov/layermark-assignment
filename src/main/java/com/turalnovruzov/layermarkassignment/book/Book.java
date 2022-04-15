@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
@@ -17,10 +18,11 @@ public class Book {
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private UUID id;
 
-    @NotNull
+    @NotBlank
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
+    @NotBlank
     @Length(min = 17, max = 17)
     @Column(name = "isbn", nullable = false, length = 17)
     private String isbn;
@@ -29,6 +31,14 @@ public class Book {
     @ManyToOne(optional = false)
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
+
+    public Book() {}
+
+    public Book(String name, String isbn, Author author) {
+        this.name = name;
+        this.isbn = isbn;
+        this.author = author;
+    }
 
     public Author getAuthor() {
         return author;
@@ -56,12 +66,6 @@ public class Book {
 
     public UUID getId() {
         return id;
-    }
-
-    public void updateWithBook(Book newBook) {
-        this.setIsbn(newBook.getIsbn());
-        this.setName(newBook.getName());
-        this.setAuthor(newBook.getAuthor());
     }
 
     @Override
