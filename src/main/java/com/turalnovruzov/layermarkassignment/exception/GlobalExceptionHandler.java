@@ -1,9 +1,9 @@
 package com.turalnovruzov.layermarkassignment.exception;
 
-import com.turalnovruzov.layermarkassignment.payload.ErrorResponse;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +13,7 @@ import java.util.Date;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({ResourceNotFoundException.class, EmptyResultDataAccessException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse resourceNotFoundException(HttpServletRequest request) {
         return new ErrorResponse(
                 new Date(),
